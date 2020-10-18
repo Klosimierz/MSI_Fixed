@@ -1,0 +1,22 @@
+<table class="table table-striped" *ngIf='delegations$ | async as delegations'>
+    <thead>
+      <tr>
+        <th scope="col">Lp.</th>
+        <th scope="col">Imię i nazwisko</th>
+        <th scope="col">Data od:</th>
+        <th scope="col">Data do:</th>
+        <th scope="col">Miejsce wyjazdu:</th>
+        <th scope="col">Miejsce przyjazdu:</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let delegation of delegations'>
+            <td>{{delegation.lp}}</td>
+            <td>{{delegation.imie_i_nazwisko}}</td>
+            <td>{{delegation.data_od | date }}</td>
+            <td>{{delegation.data_do | date}}</td>
+            <td>{{delegation.miejsce_wyjazdu}}</td>
+            <td>{{delegation.miejsce_przyjazdu}}</td>
+        </tr>
+    </tbody>
+  </table>

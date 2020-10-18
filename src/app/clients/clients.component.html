@@ -1,0 +1,138 @@
+<table style="table-layout: fixed" class="table" *ngIf='clients$ | async as clients'>
+    <thead>
+        <tr>
+            <th scope="col">NIP</th>
+            <th scope="col">REGON</th>
+            <th scope="col">NAZWA</th>
+            <th scope="col">CZY PŁATNIK VAT?</th>
+            <th scope="col">ULICA</th>
+            <th scope="col">NR DOMU</th>
+            <th scope="col">NR MIESZKANIA</th>
+            <th scope="col">AKCJE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let client of clients' [hidden]='client.deletion_mark === true'>
+            <td>{{client.nip}}</td>
+            <td>{{client.regon}}</td>
+            <td>{{client.nazwa}}</td>
+            <td>{{client.vat_status ? "tak" : "nie" }}</td>
+            <td>{{client.ulica}}</td>
+            <td>{{client.nr_domu}}</td>
+            <td>{{client.nr_mieszkania ? client.nr_mieszkania : "B.jednorodzinny"}}</td>
+            <td>
+                <div ngbDropdown>
+                    <button class="btn btn-primary" ngbDropdownToggle>Wybierz akcję</button>
+                    <div ngbDropdownMenu>
+                        <button ngbDropdownItem (click)="open(editClient,client.id)">
+                            Edytuj rekord
+                        </button>
+                        <button ngbDropdownItem (click)="deleteClient(client.id)">
+                            Usuń rekord
+                        </button>
+                    </div>
+                </div>
+            </td>
+            <ng-template #editClient let-modal>
+                <div class="p-2">
+                    <form #editClientForm="ngForm" (ngSubmit)="edit(editClientForm,client.id)">
+                        <div class="form-group">
+                            <label for="nip">Zmień NIP</label>
+                            <input ngModel class="form-control" name="nip" type="text" id="nip" required minlength="10" maxlength="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="regon">Zmień REGON</label>
+                            <input ngModel class="form-control" name="regon" type="number" id="regon" step="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nazwa">Zmień NAZWĘ</label>
+                            <input ngModel class="form-control" name="nazwa" type="text" id="nazwa" required>
+                        </div>
+                        <div>
+                            <div class="d-block">
+                            <span>Płatnik vat?</span>
+                        </div>
+                            <div class="d-inline">
+                                <label for="vat_Y">TAK</label>
+                                <input ngModel class="ml-1" name="vat" type="radio" id="vat_Y" value="true" required>
+                            </div>
+                            <div class="d-inline">
+                                <label for="vat_N">NIE</label>
+                                <input ngModel class="ml-1" name="vat" type="radio" id="vat_N" value="false" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ulica">Zmień ULICĘ</label>
+                            <input ngModel class="form-control" name="ulica" type="text" id="ulica" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nrdomu">Zmień NR DOMU</label>
+                            <input ngModel class="form-control" name="nrdomu" type="number" id="nrdomu" step="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nrmieszkania">Zmień NR MIESZKANIA</label>
+                            <input ngModel class="form-control" name="nrmieszkania" type="number" id="nrmieszkania"
+                                step="1" [placeholder]="client.nr_mieszkania ? client.nr_mieszkania : '-'">
+                        </div>
+                        <div *ngIf="editClientForm.invalid && editClientForm.touched" class="alert alert-warning">
+                            Upewnij się że wypełniłeś formularz prawidłowo. Wszystko poza numerem mieskznia jest wymagane a NIP musi mieć 10 cyfr
+                        </div>
+                        <button class="btn-block btn btn-primary" type="submit" [disabled]="editClientForm.invalid">Submit</button>
+                    </form>
+                </div>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <button class="btn btn-primary btn-block" (click)="open(insertClient)">
+        Dodaj kontrahenta
+    </button>
+</div>
+<ng-template #insertClient let-modal>
+    <div class="p-2">
+        <form #newClientForm="ngForm" (ngSubmit)="addClient(newClientForm)">
+            <div class="form-group">
+                <label for="nip">Nip</label>
+                <input ngModel class="form-control" name="nip" type="text" id="nip" minlength="10" maxlength="10" required placeholder="Podaj NIP">
+            </div>
+            <div class="form-group">
+                <label for="regon">Regon</label>
+                <input ngModel class="form-control" name="regon" type="number" id="regon" minlength="9" maxlength="9" required step="1">
+            </div>
+            <div class="form-group">
+                <label for="nazwa">Nazwa</label>
+                <input ngModel class="form-control" name="nazwa" type="text" id="nazwa" required>
+            </div>
+            <div>
+                <div class="d-block">
+                <span>Płatnik vat?</span>
+            </div>
+                <div class="d-inline">
+                    <label for="vat_Y">TAK</label>
+                    <input ngModel class="ml-1" name="vat" type="radio" id="vat_Y" value="true" required>
+                </div>
+                <div class="d-inline">
+                    <label for="vat_N">NIE</label>
+                    <input ngModel class="ml-1" name="vat" type="radio" id="vat_N" value="false" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ulica">Ulica</label>
+                <input ngModel class="form-control" name="ulica" type="text" id="ulica" required>
+            </div>
+            <div class="form-group">
+                <label for="nrdomu">Nr domu</label>
+                <input ngModel class="form-control" name="nrdomu" type="number" id="nrdomu" minlength="1" maxlength="5" required step="1">
+            </div>
+            <div class="form-group">
+                <label for="nrmieszkania">Nr mieszkania</label>
+                <input ngModel class="form-control" name="nrmieszkania" type="number" id="nrmieszkania" minlength="" maxlength="5" step="1">
+            </div>
+            <div *ngIf="newClientForm.invalid && newClientForm.touched" class="alert alert-warning">
+                Upewnij się że wypełniłeś formularz prawidłowo. Wszystko poza numerem mieskznia jest wymagane a NIP musi mieć 10 cyfr
+            </div>
+            <button class="btn-block btn btn-primary" type="submit" [disabled]="newClientForm.invalid">Zatwierdź</button>
+        </form>
+    </div>
+</ng-template>

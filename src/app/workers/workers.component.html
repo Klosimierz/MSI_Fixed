@@ -1,0 +1,33 @@
+<div *ngIf="workersTab">
+    <table class="table table-borderless table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Lp.</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Stanowisko</th>
+                <th scope="col">Data zatrudnienia</th>
+                <th scope="col">Ilość dni urlopowych</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr [ngStyle]="{'background-color': id%2===0 ? color_A:color_B }" *ngFor='let pracownik of workersTab; let id = index;'>
+                <td>{{id + 1}}</td>
+                <td>{{pracownik.imie}}</td>
+                <td>{{pracownik.nazwisko}}</td>
+                <td>{{pracownik.stanowisko}}</td>
+                <td>{{pracownik.data_zatrudnienia}}</td>
+                <td>{{pracownik.dni_urlopowe}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <p>Tu możesz zmienić kolor wierszy</p>
+    <form>      
+        <label for="color_1">Kolor A</label>
+        <input class="m-2" [(ngModel)]="color_A" id="color_1"  name="color_1" type="color"/>
+        <label for="color_2">Kolor B</label>
+        <input class="m-2" [(ngModel)]="color_B" id="color_2"  name="color_2" type="color"/>       
+    </form>
+</div>

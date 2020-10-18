@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="bg-dark rounded text-white mb-1">
+        <h5 class="m-2">Dane firmy:</h5>
+        <div class="row" align="center">
+            <div class="col mb-2">
+                <label class="d-block mr-3" for="nip">NIP</label>
+                <input class="border-0 rounded" type="text" id="nip" placeholder="Twój nip">
+            </div>
+            <div class="col">
+                <label class="d-block mr-3" for="regon">REGON</label>
+                <input class="border-0 rounded" type="number" id="regon" step="1" placeholder="Tu wpisz regon">
+            </div>
+            <div class="col">
+                <label class="d-block mr-3" for="nazwa">NAZWA FIRMY</label>
+                <input class="border-0 rounded" type="text" id="nazwa" placeholder="Nazwa firmy">
+            </div>
+        </div>
+    </div>
+    <div class="lighter_gray rounded text-white mb-1">
+        <div class="row" align="center">
+            <div class="col mb-2">
+                <label class="d-block mr-3" for="data">DATA ZAŁOŻENIA</label>
+                <input class="border-0 rounded" type="date" id="data">
+            </div>
+            <div class="col">
+                <label class="d-block" for="ulica">ULICA</label>
+                <input class="border-0 rounded" type="text" id="ulica" placeholder="Ulica">
+            </div>
+            <div class="col">
+                <label class="d-block" for="budynek">NR BUDYNKU</label>
+                <input class="border-0 rounded" type="text" id="budynek" placeholder="Nr budynku">
+            </div>
+        </div>
+    </div>
+    <div class="even_lighter_gray rounded text-white mb-1">
+        <div class="row" align="center">
+            <div class="col">
+                <label class="d-block" for="mieszkanie">NR MIESZKANIA</label>
+                <input class="border-0 rounded" type="text" id="mieszkanie" placeholder="Nr budynku">
+            </div>
+            <div class="col">
+                <label class="d-block" for="uwagi">UWAGI</label>
+                <textarea class="border-0 rounded" rows="2" cols="50" id="uwagi"
+                    placeholder="Tu wpisz swoje uwagi"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="even_lighter_gray_plus rounded text-white">
+        <h5 class="ml-2">Listy wyboru:</h5>
+        <div class="row" align="center">
+            <div class="col mb-2">
+                <label class="d-block" for="VAT_pick">VAT</label>
+                <select class="border-0 rounded" name="VAT_pick" id="VAT_pick">
+                    <option value="ZW">ZW</option>
+                    <option value="NP">NP.</option>
+                    <option value="0%">0%</option>
+                    <option value="3%">3%</option>
+                    <option value="8%">8%</option>
+                    <option value="23%">23%</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="d-block" for="colors">KOLORY</label>
+                <select class="border-0 rounded" name=colors id="kolory">
+                    <option class="bg-success" value="ZIELONY">ZIELONY</option>
+                    <option class="bg-primary" value="NIEBIESKI">NIEBIESKI</option>
+                    <option class="bg-secondary" value="SZARY">SZARY</option>
+                    <option class="bg-info" value="TURKUSOWY">TURKUSOWY</option>
+                    <option class="granatowy text-white" value="GRANATOWY">GRANATOWY</option>
+                    <option class="bg-danger" value="CZERWONY">CZERWONY</option>
+                    <option class="bg-white" value="BIAŁY">BIAŁY</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="d-block" for="lista_up">Lista uporządkowana</label>
+                <ol id="lista_up">
+                    <li>Element</li>
+                    <li>Element</li>
+                    <li>Element</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

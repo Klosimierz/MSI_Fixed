@@ -1,0 +1,29 @@
+<table *ngIf="faktury" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Lp.</th>
+        <th scope="col">Opis</th>
+        <th scope="col">MPK</th>
+        <th scope="col">Kwota netto</th>
+        <th scope="col">Ilość</th>
+        <th scope="col">Vat</th>
+        <th scope="col">Kwota brutto</th>
+        <th scope="col">Wartość netto</th>
+        <th scope="col">Wartość brutto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [ngClass]='(flag_A === true) && ((element.Kwota_netto*(1+element.VAT/100)*element.Ilosc)>1000) ? "bg-success":"bg-white"' *ngFor='let element of faktury; let id = index'>
+        <td>{{id + 1}}</td>
+        <td>{{element.opis}}</td>
+        <td>{{element.MPK}}</td>
+        <td>{{element.Kwota_netto}}</td>
+        <td>{{element.Ilosc}}</td>
+        <td>{{element.VAT}}</td>
+        <td>{{element.Kwota_netto*(1+element.VAT/100) | number:'2.2-2'}}</td>
+        <td>{{element.Kwota_netto*element.Ilosc | number:'2.2-2'}}</td>
+        <td>{{element.Kwota_netto*(1+element.VAT/100)*element.Ilosc | number:'2.2-2'}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary p-2 mt-3" (click)='swapFlag()' >Powyżej 1000,00 zł netto</button>
